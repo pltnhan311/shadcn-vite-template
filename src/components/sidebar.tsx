@@ -12,8 +12,8 @@ import {
 
 export function Sidebar() {
 	return (
-		<div className="row-span-full flex gap-8 border-r border-gray-700 pt-5">
-			<ul className="mt-10 flex w-full flex-col gap-y-3">
+		<div className="row-span-full flex gap-8 border-r border-gray-800 pt-5">
+			<ul className="mt-24 flex w-full flex-col gap-y-3">
 				<NavLink to="/" icon={<BoxIcon />}>
 					Home
 				</NavLink>
@@ -47,7 +47,7 @@ const NavLink: React.FC<NavLinkProps> = ({ to, icon, children }) => {
 	return (
 		<li>
 			<Link
-				className="flex items-center gap-x-3 rounded-md px-10 py-3 text-lg transition duration-300 ease-in-out hover:bg-gray-800 hover:text-yellow-500"
+				className="flex items-center gap-x-3 rounded-md px-10 py-3 text-lg transition duration-300 ease-in-out hover:bg-[#111827] hover:text-yellow-500"
 				to={to}
 			>
 				{icon}
