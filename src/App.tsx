@@ -1,39 +1,46 @@
-import { SiteHeader } from "@/components/site-header"
-import { useRoutes } from "react-router-dom"
-import { TailwindIndicator } from "./components/tailwind-indicator"
-
-const routes = [{ path: "/", element: <Home /> }]
-
-function Home() {
-  return (
-    <section className="container grid items-center gap-6 pb-8 pt-6 md:py-10">
-      <div className="flex max-w-[980px] flex-col items-start gap-2">
-        <h1 className="text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl">
-          Beautifully designed components <br className="hidden sm:inline" />
-          built with Radix UI and Tailwind CSS.
-        </h1>
-        <p className="max-w-[700px] text-lg text-muted-foreground">
-          Accessible and customizable components that you can copy and paste
-          into your apps. Free. Open Source. And Vite Ready.
-        </p>
-      </div>
-      <div></div>
-    </section>
-  )
-}
+import AppLayout from "@/components/layout/app-layout"
+import Account from "@/pages/Account"
+import Bookings from "@/pages/Bookings"
+import Cabins from "@/pages/Cabins"
+import Dashboard from "@/pages/Dashboard"
+import PageNotFound from "@/pages/PageNotFound"
+import Settings from "@/pages/Settings"
+import Users from "@/pages/Users"
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools"
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom"
 
 function App() {
-  const children = useRoutes(routes)
+	const queryClient = new QueryClient({
+		defaultOptions: {
+			queries: {
+				// staleTime: 60 * 1000,
+				staleTime: 0,
+			},
+		},
+	})
 
-  return (
-    <>
-      <div className="relative flex min-h-screen flex-col">
-        <SiteHeader />
-        <div className="flex-1">{children}</div>
-      </div>
-      <TailwindIndicator />
-    </>
-  )
+	return (
+		<QueryClientProvider client={queryClient}>
+			<ReactQueryDevtools initialIsOpen={false} />
+
+			<BrowserRouter>
+				<Routes>
+					<Route element={<AppLayout />}>
+						<Route index element={<Navigate replace to="dashboard" />} />
+						<Route path="dashboard" element={<Dashboard />} />
+						<Route path="bookings" element={<Bookings />} />
+						<Route path="cabins" element={<Cabins />} />
+						<Route path="users" element={<Users />} />
+						<Route path="settings" element={<Settings />} />
+						<Route path="account" element={<Account />} />
+					</Route>
+
+					<Route path="*" element={<PageNotFound />} />
+				</Routes>
+			</BrowserRouter>
+		</QueryClientProvider>
+	)
 }
 
 export default App

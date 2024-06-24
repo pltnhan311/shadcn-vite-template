@@ -21,6 +21,8 @@ export default {
 		},
 		extend: {
 			colors: {
+				warning: "hsl(var(--warning))",
+				"warning-foreground": "hsl(var(--warning-foreground))",
 				border: "hsl(var(--border))",
 				input: "hsl(var(--input))",
 				ring: "hsl(var(--ring))",
@@ -73,6 +75,10 @@ export default {
 			animation: {
 				"accordion-down": "accordion-down 0.2s ease-out",
 				"accordion-up": "accordion-up 0.2s ease-out",
+			},
+			fontFamily: {
+				lexend: ["Lexend", "sans-serif"],
+				"times-new-roman": ["Times New Roman", "serif"],
 			},
 		},
 	},
