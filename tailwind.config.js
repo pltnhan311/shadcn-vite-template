@@ -77,7 +77,7 @@ export default {
 				"accordion-up": "accordion-up 0.2s ease-out",
 			},
 			fontFamily: {
-				lexend: ["Lexend", "sans-serif"],
+				"lexend": ["Lexend", "sans-serif"],
 				"times-new-roman": ["Times New Roman", "serif"],
 			},
 		},

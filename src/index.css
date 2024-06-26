@@ -42,15 +42,16 @@
 
 	.dark {
 		--warning: 48 96% 89%;
-		--warning-foreground: 38 92% 50%;
+		--warning-foreground: 45 55% 67%;
 
-		--background: 217,32%,14%;
-		--foreground: 45 55% 67%;
+		--background: 217, 32%, 14%;
+		/* --foreground: 45 55% 67%; */
+		--foreground: 210 40% 98%;
 
 		--card: 222.2 84% 4.9%;
 		--card-foreground: 210 40% 98%;
 
-		--popover: 217,32%,14%;
+		--popover: 217, 32%, 14%;
 		--popover-foreground: 210 40% 98%;
 
 		--primary: 210 40% 98%;
@@ -74,7 +75,7 @@
 	}
 
 	* {
-		@apply font-lexend m-0 box-border border-border p-0;
+		@apply m-0 box-border border-border p-0 font-lexend;
 	}
 
 	body {
@@ -91,6 +92,16 @@
 	}
 	* ::-webkit-scrollbar-thumb:hover {
 		@apply bg-[#606060];
+	}
+
+	h1 {
+		@apply text-3xl;
+	}
+	h2 {
+		@apply text-2xl;
+	}
+	h3 {
+		@apply text-xl;
 	}
 
 	strong,

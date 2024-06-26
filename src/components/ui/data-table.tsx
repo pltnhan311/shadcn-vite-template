@@ -15,15 +15,18 @@ import {
 	TableHeader,
 	TableRow,
 } from "@/components/ui/table"
+import { Spinner } from "@/components/spinner"
 
 interface DataTableProps<TData, TValue> {
 	columns: ColumnDef<TData, TValue>[]
 	data: TData[]
+	isLoading?: boolean
 }
 
 export function DataTable<TData, TValue>({
 	columns,
 	data,
+	isLoading,
 }: DataTableProps<TData, TValue>) {
 	const table = useReactTable({
 		data,
@@ -32,7 +35,7 @@ export function DataTable<TData, TValue>({
 	})
 
 	return (
-		<div className="rounded-md border">
+		<div className="rounded-md border text-warning-foreground">
 			<Table>
 				<TableHeader>
 					{table.getHeaderGroups().map((headerGroup) => (
@@ -53,7 +56,16 @@ export function DataTable<TData, TValue>({
 					))}
 				</TableHeader>
 				<TableBody>
-					{table.getRowModel().rows?.length ? (
+					{isLoading ? ( // Check if isLoading is true
+						<TableRow>
+							<TableCell
+								colSpan={columns.length / 2}
+								className="flex h-24 items-center justify-center"
+							>
+								<Spinner />
+							</TableCell>
+						</TableRow>
+					) : table.getRowModel().rows?.length ? (
 						table.getRowModel().rows.map((row) => (
 							<TableRow
 								key={row.id}

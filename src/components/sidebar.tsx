@@ -12,7 +12,7 @@ import {
 
 export function Sidebar() {
 	return (
-		<div className="row-span-full flex gap-8 border-r border-gray-800 pt-5">
+		<div className="row-span-full flex gap-8 border-r border-gray-800 pt-5  text-warning-foreground">
 			<ul className="mt-24 flex w-full flex-col gap-y-3">
 				<NavLink to="/" icon={<BoxIcon />}>
 					Home
