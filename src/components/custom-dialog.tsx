@@ -9,7 +9,7 @@ import {
 	// DialogTrigger,
 } from "@/components/ui/dialog"
 
-export function ResponsiveDialog({
+export function CustomDialog({
 	children,
 	isOpen,
 	setIsOpen,

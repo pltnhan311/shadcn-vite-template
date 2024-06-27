@@ -34,25 +34,22 @@ export function CreateCabinForm({
 }) {
 	const form = useForm()
 	const fileRef = form.register("image")
-	console.log(cabinId)
 	const isEditing = Boolean(cabinId)
 
 	useEffect(() => {
 		if (!isEditing || !cabin) return
 
-		const { name, maxCapacity, regularPrice, discount } = cabin || {}
+		const { name, maxCapacity, regularPrice, discount, image } = cabin || {}
 		form.setValue("name", name ?? undefined)
 		form.setValue("maxCapacity", maxCapacity ?? undefined)
 		form.setValue("regularPrice", regularPrice ?? undefined)
 		form.setValue("discount", discount ?? undefined)
+		form.setValue("image", image ?? undefined)
 	}, [form, isEditing, cabin])
-
-	const dialogClose = () => {
-		document.getElementById("closeDialog")?.click()
-	}
 
 	const { isCreating, createCabin } = useCreateCabin()
 	const { editCabin } = useEditCabin()
+
 	// 2. Define a submit handler.
 	function onSubmit(data: any) {
 		const image = typeof data.image === "string" ? data.image : data.image[0]
@@ -64,8 +61,7 @@ export function CreateCabinForm({
 				{
 					onSuccess: () => {
 						form.reset()
-						dialogClose()
-						setIsOpen(false) // Close the dialog/form
+						setIsOpen(false)
 					},
 				},
 			)
@@ -73,7 +69,7 @@ export function CreateCabinForm({
 			createCabin(formData, {
 				onSuccess: () => {
 					form.reset()
-					dialogClose()
+					setIsOpen(false)
 				},
 			})
 		}

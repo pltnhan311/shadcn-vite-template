@@ -7,12 +7,11 @@ import {
 	DropdownMenu,
 	DropdownMenuContent,
 	DropdownMenuItem,
-	DropdownMenuSeparator,
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Row } from "@tanstack/react-table"
 import { MoreHorizontal, PenSquare, Trash2 } from "lucide-react"
-import { ResponsiveDialog } from "@/components/responsive-dialog"
+import { CustomDialog } from "@/components/custom-dialog"
 import { CreateCabinForm } from "@/features/cabins/CreateCabinForm"
 import IconMenu from "@/components/icon-menu"
 import { Cabin } from "@/features/cabins/columns"
@@ -24,11 +23,12 @@ interface DataTableRowActionsProps<TData> {
 export function DataTableRowActions({ row }: DataTableRowActionsProps<Cabin>) {
 	const [isEditOpen, setIsEditOpen] = useState(false)
 	const [isDeleteOpen, setIsDeleteOpen] = useState(false)
+
 	const cabinId = row.original.id
 
 	return (
 		<>
-			<ResponsiveDialog
+			<CustomDialog
 				isOpen={isEditOpen}
 				setIsOpen={setIsEditOpen}
 				title="Edit Cabin"
@@ -38,28 +38,15 @@ export function DataTableRowActions({ row }: DataTableRowActionsProps<Cabin>) {
 					cabinId={cabinId}
 					setIsOpen={setIsEditOpen}
 				/>
-			</ResponsiveDialog>
-			<ResponsiveDialog
-				isOpen={isDeleteOpen}
-				setIsOpen={setIsDeleteOpen}
-				title="Delete Person"
-				description="Are you sure you want to delete this person?"
-			>
-				<CreateCabinForm
-					cabin={row.original}
-					cabinId={cabinId}
-					setIsOpen={setIsEditOpen}
-				/>
-			</ResponsiveDialog>
+			</CustomDialog>
 
-			<DropdownMenu>
+			<DropdownMenu modal={false}>
 				<DropdownMenuTrigger asChild>
-					<Button variant="ghost" className="h-8 w-8 p-0">
-						<span className="sr-only">Open menu</span>
+					<Button variant="ghost" className="h-8 w-8 bg-blue-800 p-0">
 						<MoreHorizontal className="h-4 w-4" />
 					</Button>
 				</DropdownMenuTrigger>
-				<DropdownMenuContent align="end" className="z-50 w-[160px]">
+				<DropdownMenuContent align="end" className="z-50 w-[120px]">
 					<DropdownMenuItem className="group flex w-full items-center justify-between p-0 text-left text-sm">
 						<button
 							onClick={() => {
@@ -70,7 +57,6 @@ export function DataTableRowActions({ row }: DataTableRowActionsProps<Cabin>) {
 							<IconMenu text="Edit" icon={<PenSquare className="h-4 w-4" />} />
 						</button>
 					</DropdownMenuItem>
-					<DropdownMenuSeparator />
 					<DropdownMenuItem className="group flex w-full items-center justify-between p-0 text-left text-sm text-neutral-500 ">
 						<button
 							onClick={() => {
