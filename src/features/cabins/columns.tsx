@@ -2,6 +2,8 @@
 
 import { ColumnDef } from "@tanstack/react-table"
 import { DataTableRowActions } from "@/features/cabins/data-table-row-actions"
+import { ArrowUpDown } from "lucide-react"
+import { Button } from "@/components/ui/button"
 
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
@@ -12,6 +14,7 @@ export type Cabin = {
 	discount: number
 	regularPrice: number
 	image: string
+	description: string
 }
 
 export const columns: ColumnDef<Cabin>[] = [
@@ -25,11 +28,31 @@ export const columns: ColumnDef<Cabin>[] = [
 	},
 	{
 		accessorKey: "name",
-		header: "CABIN",
+		header: ({ column }) => {
+			return (
+				<Button
+					variant="ghost"
+					onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+				>
+					CABIN
+					<ArrowUpDown className="ml-2 h-3 w-3" />
+				</Button>
+			)
+		},
 	},
 	{
 		accessorKey: "maxCapacity",
-		header: "CAPACITY",
+		header: ({ column }) => {
+			return (
+				<Button
+					variant="ghost"
+					onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+				>
+					CAPACITY
+					<ArrowUpDown className="ml-2 h-3 w-3" />
+				</Button>
+			)
+		},
 		cell: ({ getValue }) => {
 			const value = getValue<number>()
 			return `Fits up to ${value} guests`
@@ -37,7 +60,17 @@ export const columns: ColumnDef<Cabin>[] = [
 	},
 	{
 		accessorKey: "regularPrice",
-		header: "PRICE",
+		header: ({ column }) => {
+			return (
+				<Button
+					variant="ghost"
+					onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+				>
+					PRICE
+					<ArrowUpDown className="ml-2 h-3 w-3" />
+				</Button>
+			)
+		},
 		cell: ({ getValue }) => {
 			const value = getValue<number>()
 			return `$${value}`
@@ -45,7 +78,17 @@ export const columns: ColumnDef<Cabin>[] = [
 	},
 	{
 		accessorKey: "discount",
-		header: "DISCOUNT",
+		header: ({ column }) => {
+			return (
+				<Button
+					variant="ghost"
+					onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+				>
+					DISCOUNT
+					<ArrowUpDown className="ml-2 h-3 w-3" />
+				</Button>
+			)
+		},
 		cell: ({ getValue }) => {
 			const value = getValue<number>()
 			return `$${value}`

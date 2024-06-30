@@ -22,6 +22,7 @@ import {
 import { Dispatch, SetStateAction, useEffect } from "react"
 import { Cabin } from "@/features/cabins/columns"
 import { useEditCabin } from "@/features/cabins/use-edit-cabin"
+import toast from "react-hot-toast"
 
 export function CreateCabinForm({
 	cabin,
@@ -68,8 +69,12 @@ export function CreateCabinForm({
 		} else {
 			createCabin(formData, {
 				onSuccess: () => {
+					toast.success("New cabin successfully created")
 					form.reset()
 					setIsOpen(false)
+				},
+				onError: (err) => {
+					toast.error(err.message)
 				},
 			})
 		}
@@ -141,7 +146,7 @@ export function CreateCabinForm({
 							<FormItem>
 								<FormLabel>Discount</FormLabel>
 								<FormControl>
-									<Input type="input" placeholder="Discount..." {...field} />
+									<Input type="number" placeholder="Discount..." {...field} />
 								</FormControl>
 								<FormMessage />
 							</FormItem>
